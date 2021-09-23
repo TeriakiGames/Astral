@@ -4,36 +4,55 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] Animator anim;
-    [SerializeField] GameObject startButton;
-    [SerializeField] GameObject backButton;
+    [SerializeField] Animator mainMenuAnim;
+    [SerializeField] Animator optionAnim;
+    [Header("Start Canvas")]
+    [SerializeField] GameObject mainMenuStartButton;
+    [SerializeField] GameObject mainMenuBackButton;
+    // Could add sprite and switch gameobjects sprite instead of enable and disable...
+    [Header("Option Canvas")]
+    [SerializeField] GameObject optionButton;
+    [SerializeField] GameObject optionBackButton = null;
 
     private void Start()
     {
         SetActiveButonOn();
     }
-
+    
     public void MainToStart()
     {
-        anim.SetBool("StartGame", true);
+        mainMenuAnim.SetBool("StartGame", true);
         SetActiveButtonOff();
     }
-
     public void StartToMain()
     {
-        anim.SetBool("StartGame", false);
+        mainMenuAnim.SetBool("StartGame", false);
         SetActiveButonOn();
+    }
+
+    public void OpenOptionPanel()
+    {
+        optionAnim.SetBool("openOption", true);
+        optionButton.SetActive(false);
+    }
+    public void CloseOptionPanel()
+    {
+        optionAnim.SetBool("openOption", false);
+        optionButton.SetActive(true);
     }
 
     private void SetActiveButonOn()
     {
-        startButton.SetActive(true);
-        backButton.SetActive(false);
+        mainMenuStartButton.SetActive(true);
+        mainMenuBackButton.SetActive(false);
+        optionButton.SetActive(true);
     }
 
     private void SetActiveButtonOff()
     {
-        startButton.SetActive(false);
-        backButton.SetActive(true);
+        mainMenuStartButton.SetActive(false);
+        mainMenuBackButton.SetActive(true);
     }
+
+    
 }
